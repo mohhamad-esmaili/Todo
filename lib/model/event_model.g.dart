@@ -19,20 +19,17 @@ class EventAdapter extends TypeAdapter<Event> {
     return Event(
       dateTime: fields[0] as DateTime,
       title: fields[1] as String,
-      priority: fields[2] as Color,
     );
   }
 
   @override
   void write(BinaryWriter writer, Event obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(2)
       ..writeByte(0)
       ..write(obj.dateTime)
       ..writeByte(1)
-      ..write(obj.title)
-      ..writeByte(2)
-      ..write(obj.priority);
+      ..write(obj.title);
   }
 
   @override
