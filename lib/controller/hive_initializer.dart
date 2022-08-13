@@ -6,9 +6,9 @@ List<Box> boxList = [];
 Future<List<Box>> openBox() async {
   final document = await getApplicationDocumentsDirectory();
   await Hive.initFlutter(document.path);
+  Hive.registerAdapter(EventAdapter());
   var eventBox = await Hive.openBox('events');
   var themeBox = await Hive.openBox("isDarkMode");
-  Hive.registerAdapter(EventAdapter());
   boxList.add(eventBox);
   boxList.add(themeBox);
   return boxList;
