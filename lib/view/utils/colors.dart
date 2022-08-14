@@ -1,15 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MainColors {
   Color whiteScaffoldColor = const Color(0xfffafafb);
-  Color blackScaffoldColor = const Color(0xff3a3a3a);
+  Color blackScaffoldColor = const Color(0xff292929);
 }
 
 class TextColors {
   Color lightTextColor = const Color(0xfff0f0f7);
   Color darkTextColor = const Color(0xff171717);
-  Color? calendarTextColor = Colors.grey[500];
+  Color? calendarTextColor = Colors.grey[400];
 }
 
 class TodoColors {

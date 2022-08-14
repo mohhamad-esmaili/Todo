@@ -12,13 +12,12 @@ class AppTheme {
     // textTheme start here --
     textTheme: TextTheme(
       titleLarge: TextStyle(
-        fontSize: 25,
-        fontWeight: FontWeight.w600,
+        fontSize: 23,
+        fontWeight: FontWeight.bold,
         color: _textColors.darkTextColor,
       ),
       titleMedium: TextStyle(
         fontSize: 20,
-        fontWeight: FontWeight.w500,
         color: _textColors.darkTextColor,
       ),
       titleSmall: TextStyle(
@@ -34,7 +33,7 @@ class AppTheme {
       toolbarHeight: 110,
       iconTheme: IconThemeData(color: _mainColors.blackScaffoldColor),
       titleTextStyle: TextStyle(
-        fontSize: 22,
+        fontSize: 23,
         fontWeight: FontWeight.bold,
         color: _textColors.darkTextColor,
       ),
@@ -51,7 +50,7 @@ class AppTheme {
       elevation: 0,
       toolbarHeight: 110,
       titleTextStyle: TextStyle(
-        fontSize: 20,
+        fontSize: 23,
         fontWeight: FontWeight.bold,
         color: _textColors.lightTextColor,
       ),
