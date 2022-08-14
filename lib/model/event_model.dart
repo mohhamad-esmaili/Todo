@@ -11,5 +11,8 @@ class Event extends HiveObject {
   @HiveField(1)
   String title;
 
+  // @HiveField(2)
+  // String priority;
+
   Event({required this.dateTime, required this.title});
 }

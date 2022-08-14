@@ -31,15 +31,13 @@ class DrawerWidget extends StatelessWidget {
             builder: (controller) => TextButton.icon(
               onPressed: () => controller.switchTheme(),
               icon: Icon(
-                controller.loadThemeFromBox()
+                controller.isDark.value
                     ? CupertinoIcons.brightness_solid
                     : CupertinoIcons.moon_fill,
                 color: Theme.of(context).iconTheme.color,
               ),
               label: Text(
-                controller.loadThemeFromBox()
-                    ? 'Dark Theme: on'
-                    : 'Dark Theme: off',
+                controller.isDark.value ? 'Dark Theme: on' : 'Dark Theme: off',
                 style: Theme.of(context).textTheme.labelMedium,
               ),
             ),
