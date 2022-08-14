@@ -2,6 +2,7 @@ import 'dart:collection';
 import 'package:get/get.dart';
 
 import 'package:todo/controller/hive_initializer.dart';
+
 import 'package:todo/model/event_model.dart';
 
 class EventController extends GetxController {

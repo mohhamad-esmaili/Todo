@@ -5,8 +5,8 @@ import 'package:todo/controller/hive_initializer.dart';
 class ThemeController extends GetxController {
   final _key = 'isDarkMode';
   final _themeBox = boxList[1];
+  RxBool isDark = false.obs;
 
-  bool isDark = false;
   ThemeMode get theme => loadThemeFromBox() ? ThemeMode.dark : ThemeMode.light;
 
   bool loadThemeFromBox() => _themeBox.get(_key) ?? false;
@@ -14,7 +14,7 @@ class ThemeController extends GetxController {
   _saveThemeToBox(bool isDarkMode) => _themeBox.put(_key, isDarkMode);
 
   void switchTheme() {
-    isDark = loadThemeFromBox();
+    isDark = loadThemeFromBox().obs;
     Get.changeThemeMode(loadThemeFromBox() ? ThemeMode.light : ThemeMode.dark);
     _saveThemeToBox(!loadThemeFromBox());
     update();
