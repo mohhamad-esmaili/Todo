@@ -21,7 +21,7 @@ class AppTheme {
         color: _textColors.darkTextColor,
       ),
       titleSmall: TextStyle(
-        fontSize: 12,
+        fontSize: 15,
         color: _textColors.darkTextColor,
       ),
     ),

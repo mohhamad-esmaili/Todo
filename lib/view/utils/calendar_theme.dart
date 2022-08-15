@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:todo/controller/theme_controller.dart';
 import 'package:todo/view/utils/colors.dart';
 
 final _todoColor = TodoColors();
@@ -13,6 +11,11 @@ const double _fontSize = 20.0;
 
 class CalendarTheme {
   static const CalendarFormat calendarThemeFormat = CalendarFormat.week;
+  static final calendarDayOfWeekTheme = DaysOfWeekStyle(
+    weekdayStyle: TextStyle(color: _textColors.calendarTextColor),
+    weekendStyle: TextStyle(color: _textColors.calendarTextColor),
+  );
+
   static final calendarLightMode = CalendarStyle(
     defaultTextStyle: TextStyle(
       color: _textColors.darkTextColor,
@@ -30,6 +33,8 @@ class CalendarTheme {
       color: _textColors.lightTextColor,
       fontSize: _fontSize,
     ),
+
+    // `TableCalendar` boxdecorations
     defaultDecoration: BoxDecoration(borderRadius: _calendarDecoration),
     todayDecoration: BoxDecoration(
       color: _todoColor.lightPurple,
@@ -40,6 +45,21 @@ class CalendarTheme {
       borderRadius: _calendarDecoration,
     ),
     weekendDecoration: BoxDecoration(
+      borderRadius: _calendarDecoration,
+    ),
+    rangeEndDecoration: BoxDecoration(
+      borderRadius: _calendarDecoration,
+    ),
+    rangeStartDecoration: BoxDecoration(
+      borderRadius: _calendarDecoration,
+    ),
+    withinRangeDecoration: BoxDecoration(
+      borderRadius: _calendarDecoration,
+    ),
+    outsideDecoration: BoxDecoration(
+      borderRadius: _calendarDecoration,
+    ),
+    disabledDecoration: BoxDecoration(
       borderRadius: _calendarDecoration,
     ),
   );
@@ -63,6 +83,8 @@ class CalendarTheme {
       fontSize: _fontSize,
       fontWeight: _fontWeight,
     ),
+
+    // `TableCalendar` boxdecorations
     defaultDecoration: BoxDecoration(borderRadius: _calendarDecoration),
     todayDecoration: BoxDecoration(
       color: _todoColor.lightPurple,
@@ -82,9 +104,17 @@ class CalendarTheme {
       color: _todoColor.darkGrey,
       borderRadius: _calendarDecoration,
     ),
-  );
-  static final calendarDayOfWeekTheme = DaysOfWeekStyle(
-    weekdayStyle: TextStyle(color: _textColors.calendarTextColor),
-    weekendStyle: TextStyle(color: _textColors.calendarTextColor),
+    rangeStartDecoration: BoxDecoration(
+      borderRadius: _calendarDecoration,
+    ),
+    withinRangeDecoration: BoxDecoration(
+      borderRadius: _calendarDecoration,
+    ),
+    outsideDecoration: BoxDecoration(
+      borderRadius: _calendarDecoration,
+    ),
+    disabledDecoration: BoxDecoration(
+      borderRadius: _calendarDecoration,
+    ),
   );
 }

@@ -7,7 +7,7 @@ class MainColors {
 
 class TextColors {
   Color lightTextColor = const Color(0xfff0f0f7);
-  Color darkTextColor = const Color(0xff171717);
+  Color darkTextColor = const Color(0xff464646);
   Color? calendarTextColor = Colors.grey[400];
 }
 
@@ -27,3 +27,5 @@ class TodoColors {
   Color darkGrey = const Color(0xffb4b4c4);
   Color lightGrey = const Color(0xfff0f0f7);
 }
+
+List<Color> priorityColors = [];
