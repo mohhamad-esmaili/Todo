@@ -10,12 +10,12 @@ class DrawerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(ThemeController());
     return Drawer(
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(height: 20.0),
-          const Spacer(),
+          const SizedBox(height: 100.0),
+          // const Spacer(),
           TextButton.icon(
             icon: Icon(
               Icons.category_rounded,

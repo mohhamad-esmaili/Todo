@@ -2,10 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo/controller/event_controller.dart';
 import 'package:todo/model/event_model.dart';
-import 'package:todo/view/home/widgets/bottom_add_btn/bottom_add_btn.dart';
-import 'package:todo/view/home/widgets/home_drawer/drawer.dart';
-import 'package:todo/view/home/widgets/home_drawer/drawer_iconbtn.dart';
-import 'package:todo/view/home/widgets/table_calendar/table_calendar_widget.dart';
+
+import 'package:todo/view/home/widgets/widget_exporter.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -18,25 +16,40 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         leading: const DrawerIcon(),
         titleSpacing: 0,
-        title: const Text("To do"),
+        title: const AppBarRowWidget(),
       ),
       body: GetX<EventController>(
-        builder: (controller) => Column(
-          children: [
-            TableCalendarWidget(),
-            ...eventController.getEvents(controller.selectedDay.value).map(
-                  (Event event) => ListTile(
-                    title: Text(
-                      event.title,
+        builder: (controller) => SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TableCalendarWidget(),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount:
+                    controller.getEvents(controller.selectedDay.value).length,
+                itemBuilder: (BuildContext context, int index) {
+                  List<Event> allEvents =
+                      controller.getEvents(controller.selectedDay.value);
+                  return ListTile(
+                    tileColor: allEvents[index].priority,
+                    title: Text(allEvents[index].title),
+                    trailing: IconButton(
+                      onPressed: () => controller.deleteEvent(index),
+                      icon: const Icon(Icons.delete),
                     ),
-                    trailing:
-                        IconButton(onPressed: () {}, icon: Icon(Icons.delete)),
-                  ),
-                ),
-          ],
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
-      bottomSheet: const BottomAddEventBTN(),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () => eventController.createItem('1', Colors.red),
+      // ),
+      bottomSheet: const AddEventBTN(),
     );
   }
 }

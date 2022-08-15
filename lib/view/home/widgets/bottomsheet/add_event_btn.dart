@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo/view/home/widgets/bottom_sheet/event_bottomsheet.dart';
-
+import 'package:todo/view/home/widgets/bottomsheet/event_sheet.dart';
 import 'package:todo/view/utils/colors.dart';
 
-class BottomAddEventBTN extends StatelessWidget {
-  const BottomAddEventBTN({Key? key}) : super(key: key);
+class AddEventBTN extends StatelessWidget {
+  const AddEventBTN({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.bottomSheet(const AddEventBottomSheet()),
+      onTap: () =>
+          Get.bottomSheet(isScrollControlled: true, CreateEventSheet()),
       child: Container(
         color: Theme.of(context).scaffoldBackgroundColor,
         child: Container(
@@ -25,9 +25,6 @@ class BottomAddEventBTN extends StatelessWidget {
               color: TodoColors().lightPurple,
               width: 1.5,
             ),
-            // boxShadow: [
-            //   BoxShadow(color: TodoColors().lightYellow, offset: Offset(1, 1))
-            // ],
           ),
           child: Text(
             "What do you need to do?",
