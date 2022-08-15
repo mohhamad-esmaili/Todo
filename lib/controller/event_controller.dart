@@ -1,12 +1,10 @@
-import 'dart:collection';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
 import 'package:todo/controller/hive_initializer.dart';
-
 import 'package:todo/model/event_model.dart';
 
 class EventController extends GetxController {
-  List<LinkedHashMap<dynamic, dynamic>> items = [];
+  Map<dynamic, dynamic> items = {};
   var selectedDay = DateTime.now().obs;
   var focusedDay = DateTime.now().obs;
   final _eventBox = boxList[0];
@@ -18,29 +16,33 @@ class EventController extends GetxController {
   }
 
   void refreshItems() {
-    _eventBox.keys.map((key) {
-      final value = _eventBox.get(key);
-      items.add(value);
-      return value;
-    }).toList();
-
+    final value = _eventBox.get("events") ?? {};
+    items = value;
     selectedDay.refresh();
     update();
   }
 
-  Future<void> createItem() async {
-    await _eventBox.add({
-      focusedDay.value: [Event(title: "new", dateTime: focusedDay.value)]
-    });
+  Future<void> createItem(String title, Color priority) async {
+    if (items[selectedDay.value] != null) {
+      items[selectedDay.value].add(
+          Event(title: title, dateTime: selectedDay.value, priority: priority));
+    } else {
+      items[selectedDay.value] = [
+        Event(title: title, dateTime: selectedDay.value, priority: priority)
+      ];
+    }
+    await _eventBox.put('events', items);
     refreshItems();
   }
 
-  List<Event> getEvents(DateTime day) {
-    for (var eventList in items) {
-      if (eventList[day] != null) {
-        return List<Event>.from(eventList[day]);
-      }
-    }
-    return [];
+  List<Event> getEvents(DateTime date) {
+    return List<Event>.from(items[date] ?? []);
+  }
+
+  void deleteEvent(int index) async {
+    List removedEvent = items[selectedDay.value];
+    removedEvent.removeAt(index);
+    await _eventBox.put('events', items);
+    refreshItems();
   }
 }
