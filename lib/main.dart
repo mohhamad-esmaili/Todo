@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeController().theme,
       debugShowCheckedModeBanner: false,
-      initialRoute: '/home',
+      initialRoute: '/splash',
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/home', page: () => HomeScreen()),
