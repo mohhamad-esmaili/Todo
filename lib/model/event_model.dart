@@ -14,5 +14,12 @@ class Event extends HiveObject {
   @HiveField(2)
   Color priority;
 
-  Event({required this.dateTime, required this.title, required this.priority});
+  @HiveField(3)
+  bool isDone = false;
+
+  Event(
+      {required this.dateTime,
+      required this.title,
+      required this.priority,
+      this.isDone = false});
 }
