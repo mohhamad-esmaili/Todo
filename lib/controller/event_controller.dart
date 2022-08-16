@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:todo/controller/hive_initializer.dart';
@@ -14,7 +12,6 @@ class EventController extends GetxController {
   @override
   void onInit() {
     refreshItems();
-
     super.onInit();
   }
 
@@ -47,17 +44,6 @@ class EventController extends GetxController {
 
   List<Event> getEvents(DateTime date) {
     return List<Event>.from(items[date] ?? []);
-  }
-
-  List<Event> doneEvents(DateTime date) {
-    List<Event> allE = List<Event>.from(items[date] ?? []);
-    return allE.where((element) => element.isDone == true).toList();
-  }
-
-  List<Event> unDoneEvents(DateTime date) {
-    List<Event> allE = List<Event>.from(items[date] ?? []);
-
-    return allE.where((element) => element.isDone == true).toList();
   }
 
   void makeDoneEvent(int index) async {
