@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:todo/controller/hive_initializer.dart';
@@ -12,6 +14,7 @@ class EventController extends GetxController {
   @override
   void onInit() {
     refreshItems();
+
     super.onInit();
   }
 
@@ -24,11 +27,18 @@ class EventController extends GetxController {
 
   Future<void> createItem(String title, Color priority) async {
     if (items[selectedDay.value] != null) {
-      items[selectedDay.value].add(
-          Event(title: title, dateTime: selectedDay.value, priority: priority));
+      items[selectedDay.value].add(Event(
+          title: title,
+          dateTime: selectedDay.value,
+          priority: priority,
+          isDone: false));
     } else {
       items[selectedDay.value] = [
-        Event(title: title, dateTime: selectedDay.value, priority: priority)
+        Event(
+            title: title,
+            dateTime: selectedDay.value,
+            priority: priority,
+            isDone: false)
       ];
     }
     await _eventBox.put('events', items);
@@ -37,6 +47,27 @@ class EventController extends GetxController {
 
   List<Event> getEvents(DateTime date) {
     return List<Event>.from(items[date] ?? []);
+  }
+
+  List<Event> doneEvents(DateTime date) {
+    List<Event> allE = List<Event>.from(items[date] ?? []);
+    return allE.where((element) => element.isDone == true).toList();
+  }
+
+  List<Event> unDoneEvents(DateTime date) {
+    List<Event> allE = List<Event>.from(items[date] ?? []);
+
+    return allE.where((element) => element.isDone == true).toList();
+  }
+
+  void makeDoneEvent(int index) async {
+    List<dynamic> eventList = items[selectedDay.value];
+    Event editedEvent = eventList[index];
+
+    editedEvent.isDone = !editedEvent.isDone;
+
+    await _eventBox.put('events', items);
+    refreshItems();
   }
 
   void deleteEvent(int index) async {
