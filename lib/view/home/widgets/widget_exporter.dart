@@ -1,4 +1,5 @@
 export 'table_calendar/table_calendar_widget.dart';
+export 'package:todo/view/home/widgets/events_listtile/event_listtile.dart';
 
 export 'home_appbar/appbar_row.dart';
 export 'home_appbar/home_drawer/drawer.dart';

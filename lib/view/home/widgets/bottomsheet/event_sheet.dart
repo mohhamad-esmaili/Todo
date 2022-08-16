@@ -35,7 +35,7 @@ class CreateEventSheet extends StatelessWidget {
             child: Column(
               children: [
                 TextFormField(
-                  maxLength: 15,
+                  maxLength: 25,
                   autofocus: true,
                   controller: _textEditingController,
                   decoration: InputDecoration(
@@ -54,6 +54,8 @@ class CreateEventSheet extends StatelessWidget {
                       ),
                     ),
                     counterText: '',
+                    hintStyle: Theme.of(context).textTheme.titleSmall,
+                    hintText: 'What do you need to do?',
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
@@ -81,7 +83,10 @@ class CreateEventSheet extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 5),
-                    const Text("Priority"),
+                    Text(
+                      "Priority",
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
                     const Spacer(),
                     EventPrioritySelector(
                       onSelectColor: (Color newc) {
@@ -102,13 +107,19 @@ class CreateEventSheet extends StatelessWidget {
                   },
                   child: Container(
                     width: double.infinity,
-                    // height: 100,
-                    padding: const EdgeInsets.all(10),
-                    color: _todoColors.darkPurple,
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(5),
+                      color: _todoColors.darkPurple,
+                    ),
                     child: Center(
                       child: Text(
-                        'SAVE',
-                        style: Theme.of(context).textTheme.titleMedium,
+                        'S A V E',
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: TextColors().lightTextColor,
+                        ),
                       ),
                     ),
                   ),
