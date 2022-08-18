@@ -22,7 +22,7 @@ timezone: ^0.8.0
 
 
 
-### Folder Structure
+### Folder Structure (lib)
 ```
 ├───main.dart
 ├───controller
@@ -33,27 +33,33 @@ timezone: ^0.8.0
 │   ├───color_adapter.dart
 │   ├───event_model.dart
 │   └───event_model.g.dart
-├───home
-│   └───widgets
-│       ├───bottomsheet
-│       │   ├───add_event_btn.dart
-│       │   ├───event_priority_selector.dart
-│       │   └───event_sheet.dart
-│       │
-│       ├───events_listtile
-│       │   └───event_sheet.dart
-│       │
-│       ├───home_appbar
-│       │   ├───home_drawer
-│       │   │   ├───drawer_iconbtn.dart
-│       │   │   └───drawer.dart
-│       │   └───appbar_row.dart
-│       └───table_calendar
-│            └───table_calendar_widget.dart
-├───splash
-│   └───splash_screen.dart
-└───utils
-    ├───calendar_theme.dart.dart
-    ├───colors.dart
-    └───theme.dart
+├───service
+│   └───notification_service.dart
+└───view
+    ├───home
+    │   ├───home_screen.dart
+    │   └───widgets
+    │        ├───bottomsheet
+    │        ├───events_listtile
+    │        ├───home_appbar
+    │        │   ├───home_drawer
+    │        │   └───appbar_row.dart
+    │        └───table_calendar
+    ├───event
+    │   ├───event_screen.dart
+    │   └───widgets
+    │        ├───event_sections
+    │        ├───selectors_widget
+    │        └───textformfields
+    │            ├───home_drawer
+    │            └───appbar_row.dart
+    ├───splash
+    │   └───splash_screen.dart
+    └───utils
+         ├───calendar_theme.dart.dart
+         ├───colors.dart
+         └───theme.dart
 ```
+### what have done in project:
+- [x] theme controller - convert to darkmode
+- [ ] theme controller - convert to darkmode
