@@ -1,0 +1,103 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import 'package:todo/controller/event_controller.dart';
+import 'package:todo/view/event/widget/widget_exporter.dart';
+
+import 'package:todo/view/utils/colors.dart';
+
+class CreateEventScreen extends StatelessWidget {
+  CreateEventScreen({Key? key}) : super(key: key);
+  final TextEditingController _titleEditingController = TextEditingController();
+  final TextEditingController _descriptionEditingCotroller =
+      TextEditingController();
+  final EventController _eventController = Get.find<EventController>();
+
+  @override
+  Widget build(BuildContext context) {
+    DateTime pickedDateTime = _eventController.selectedDay.value;
+    int remindIn = 0;
+    Color selectedPriority = todoColors.darkGreen;
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('Add Todo'),
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+            _eventController.remindMe.value = false;
+          },
+          icon: Icon(
+            Icons.close_rounded,
+            color: Theme.of(context).iconTheme.color,
+          ),
+        ),
+      ),
+      body: GetX<EventController>(
+        builder: (controller) => Container(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                TitleTextformfieldWidget(
+                    titleEditingController: _titleEditingController),
+                const SizedBox(height: 20),
+                DescriptionTextformfieldWidget(
+                    descriptionEditingCotroller: _descriptionEditingCotroller),
+                const SizedBox(height: 20),
+                checkIfTimeIsEqual(controller.selectedDay.value)
+                    ? ReminderSectionRowWidget(
+                        remindMeBool: controller.remindMe.value,
+                        switchReminderFunction: (remindInNewValue) =>
+                            controller.remindMe.value = remindInNewValue,
+                      )
+                    : const SizedBox(),
+                _eventController.remindMe.value
+                    ? AlarmSectionColumnWidget(
+                        initialDateTimeForSelector:
+                            _eventController.selectedDay.value,
+                        remindInFunction: (value) => remindIn = value,
+                        cupertinoDatePickerFunction: (value) =>
+                            pickedDateTime = value,
+                      )
+                    : const SizedBox(height: 20),
+                PrioritySectionRowWidget(
+                  eventPrioritySelectorFunction: (value) =>
+                      selectedPriority = value,
+                ),
+                const SizedBox(height: 40),
+                InkWell(
+                  onTap: () {
+                    if (_titleEditingController.text.isNotEmpty) {
+                      _eventController.createItem(
+                        dateTime: pickedDateTime,
+                        title: _titleEditingController.text,
+                        description: _descriptionEditingCotroller.text,
+                        priority: selectedPriority,
+                        remindMe: _eventController.remindMe.value,
+                        remindIn: remindIn,
+                      );
+                      _titleEditingController.clear();
+                      _eventController.remindMe.value = false;
+                      Get.back();
+                    }
+                  },
+                  child: const InkwellChildSaveBTNWidget(),
+                ),
+                const SizedBox(height: 30),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+bool checkIfTimeIsEqual(DateTime dateTime) {
+  final DateTime nowDateTime = DateTime.now();
+  if (dateTime.day >= nowDateTime.day) {
+    return true;
+  }
+  return false;
+}
