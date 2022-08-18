@@ -1,28 +1,37 @@
 <h1 align="center">
-<img src="assets/images/logo.svg" width="50" />
+<img src="assets/images/logo.svg" width="100" />
 
 To do
+
+<!-- <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"/>
+<img src="https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white"/>
+<img src="https://img.shields.io/badge/GetX-3DDC84?style=for-the-badge&logo=logoColor=white&color=purple"/> -->
+
 </h1>
 
-### Dependencies:
-```
-flutter_local_notifications: ^9.7.1
-flutter_svg: ^1.1.3
-flutter_time_picker_spinner: ^2.0.0
-get: ^4.6.5
-hive: ^2.2.3
-hive_flutter: ^1.1.0
-intl: ^0.17.0
-loading_animation_widget: ^1.2.0+2
-path_provider: ^2.0.11
-table_calendar: ^3.0.6
-timezone: ^0.8.0
-```
+Simple todo app with notification
+with `GetX` and `Hive` and pushing notification with `flutter_local_notifications`.
+
+Ui adapted from [Rita Deyneko](https://dribbble.com/shots/5084136-DailyUi-042-ToDo-List)
+
+
+### Packages used in project :
+- [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications)
+- [flutter_svg](https://pub.dev/packages/flutter_svg)
+- [hive_flutter](https://pub.dev/packages/hive_flutter)
+- [intl](https://pub.dev/packages/intl)
+- [hive](https://pub.dev/packages/hive)
+- [get](https://pub.dev/packages/get)
+- [loading_animation_widget](https://pub.dev/packages/loading_animation_widget)
+- [path_provider](https://pub.dev/packages/path_provider)
+- [table_calendar](https://pub.dev/packages/table_calendar)
+- [timezone](https://pub.dev/packages/timezone)
 
 
 
 
-### Folder Structure (lib)
+
+### Folder Structure (lib) :
 ```
 ├───main.dart
 ├───controller
@@ -60,6 +69,27 @@ timezone: ^0.8.0
          ├───colors.dart
          └───theme.dart
 ```
-### what have done in project:
+- Controller : contains getx controllers
+    - theme_controller: where save darkmode and light and loads
+    - event_controller: core of app, load event, save, delete and ...
+    - hive_initializer: initing boxes - this function passed in `main()`
+- Model : this folder contains eventmodel where we can define our events and its eventadapter - colors_adapter for hive for saving colors in box
+- Service : all services will be apear here - notifications service
+- View : all pages and widgets and themes are here
+    - splash : first page when apps open
+    - home : the home_screen, where we can seee calendar and events - it has widget like drawer and sections are seprated almost
+    - event : event_screen allow you to create events and add reminder for yourself - all event sections are in event_sections folder like alarms & reminder, save button..
+    - utils : this folder contains tablecalendar theme - colors and ThemeData
+### What have done in this project :
+- [x] init getx
 - [x] theme controller - convert to darkmode
-- [ ] theme controller - convert to darkmode
+- [x] save events on hive
+- [x] notification service
+- [ ] calendar show events on first load
+- [ ] compatible version for ios
+- [ ] implement motivation quote 
+- [ ] add recycle bin page on drawer 
+- [ ] implement tags and search on tags 
+
+
+
