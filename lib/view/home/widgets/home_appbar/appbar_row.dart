@@ -22,7 +22,7 @@ class AppBarRowWidget extends StatelessWidget {
         Icon(
           Icons.calendar_month_outlined,
           size: 20,
-          color: TodoColors().darkPurple,
+          color: todoColors.darkPurple,
         ),
         const SizedBox(width: 10),
       ],

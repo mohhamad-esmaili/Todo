@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo/view/home/widgets/bottomsheet/event_sheet.dart';
 import 'package:todo/view/utils/colors.dart';
 
 class AddEventBTN extends StatelessWidget {
@@ -9,8 +8,7 @@ class AddEventBTN extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () =>
-          Get.bottomSheet(isScrollControlled: true, CreateEventSheet()),
+      onTap: () => Get.toNamed('/event'),
       child: Container(
         color: Theme.of(context).scaffoldBackgroundColor,
         child: Container(
@@ -22,7 +20,7 @@ class AddEventBTN extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             color: Theme.of(context).scaffoldBackgroundColor,
             border: Border.all(
-              color: TodoColors().lightPurple,
+              color: todoColors.lightPurple,
               width: 1.5,
             ),
           ),

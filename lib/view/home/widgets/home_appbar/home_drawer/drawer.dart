@@ -19,7 +19,7 @@ class DrawerWidget extends StatelessWidget {
           Container(
             width: double.infinity,
             // height: 200,
-            color: TodoColors().lightGrey,
+            color: todoColors.lightGrey,
             alignment: Alignment.center,
             padding: const EdgeInsets.only(top: 50, bottom: 50),
             child: Column(
@@ -50,7 +50,7 @@ class DrawerWidget extends StatelessWidget {
                 ),
                 Switch(
                   value: controller.loadThemeFromBox(),
-                  activeColor: TodoColors().darkYellow,
+                  activeColor: todoColors.darkYellow,
                   onChanged: (_) => controller.switchTheme(),
                 )
               ],
@@ -58,7 +58,6 @@ class DrawerWidget extends StatelessWidget {
           ),
           const Spacer(),
           Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const SizedBox(width: 15),
               Text(

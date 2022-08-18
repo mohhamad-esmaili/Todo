@@ -13,9 +13,10 @@ class TableCalendarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(ThemeController());
+    // TODO: table calendar doesnt show events on first load
     return GetBuilder<ThemeController>(
       builder: (themeController) => TableCalendar(
-        focusedDay: controller.selectedDay.value,
+        focusedDay: controller.focusedDay.value,
         firstDay: DateTime(1990),
         lastDay: DateTime(2100),
         calendarFormat: CalendarTheme.calendarThemeFormat,
@@ -30,6 +31,7 @@ class TableCalendarWidget extends StatelessWidget {
         onDaySelected: (DateTime selectDay, DateTime focusDay) {
           controller.selectedDay.value = selectDay;
           controller.focusedDay.value = focusDay;
+          controller.firstLoad.value = false;
         },
         selectedDayPredicate: (DateTime date) {
           return isSameDay(controller.selectedDay.value, date);

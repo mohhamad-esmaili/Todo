@@ -24,31 +24,44 @@ class HomeScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               TableCalendarWidget(),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  reverse: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount:
-                      controller.getEvents(controller.selectedDay.value).length,
-                  separatorBuilder: (context, index) => const SizedBox(
-                    height: 6,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    List allEvents =
-                        controller.getEvents(controller.selectedDay.value);
+              controller.firstLoad.value
+                  ? SizedBox(
+                      child: Center(
+                        child: Text(
+                          "❗ Tap on calendar to refresh ❗",
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                      ),
+                    )
+                  : Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 5, horizontal: 15),
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        reverse: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: controller
+                            .getEvents(controller.selectedDay.value)
+                            .length,
+                        separatorBuilder: (context, index) => const SizedBox(
+                          height: 6,
+                        ),
+                        itemBuilder: (BuildContext context, int index) {
+                          List allEvents = controller
+                              .getEvents(controller.selectedDay.value);
 
-                    return EventListTileWWidget(
-                      index: index,
-                      title: allEvents[index].title,
-                      priority: allEvents[index].priority,
-                      isDone: allEvents[index].isDone,
-                    );
-                  },
-                ),
-              ),
+                          return EventListTileWWidget(
+                            index: index,
+                            dateTime: allEvents[index].dateTime,
+                            title: allEvents[index].title,
+                            description: allEvents[index].description,
+                            priority: allEvents[index].priority,
+                            isDone: allEvents[index].isDone,
+                            remindMe: allEvents[index].remindMe,
+                          );
+                        },
+                      ),
+                    ),
               const SizedBox(height: 100),
             ],
           ),
