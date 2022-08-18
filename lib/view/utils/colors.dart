@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+final MainColors mainColors = MainColors();
+final TextColors textColors = TextColors();
+final TodoColors todoColors = TodoColors();
+
 class MainColors {
   Color whiteScaffoldColor = const Color(0xfffafafb);
   Color blackScaffoldColor = const Color(0xff292929);

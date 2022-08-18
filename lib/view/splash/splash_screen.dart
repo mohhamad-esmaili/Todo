@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 50,
             ),
             LoadingAnimationWidget.horizontalRotatingDots(
-              color: TodoColors().darkPurple,
+              color: todoColors.darkPurple,
               size: 55,
             ),
           ],

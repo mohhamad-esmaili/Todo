@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
+import 'package:get/get.dart';
 import 'package:todo/controller/hive_initializer.dart';
 import 'package:todo/controller/theme_controller.dart';
-import 'package:todo/view/home/home_screen.dart';
-import 'package:todo/view/splash/splash_screen.dart';
-import 'package:todo/view/utils/theme.dart';
+import 'package:todo/service/notification_service.dart';
+import 'package:timezone/data/latest.dart' as tz;
+import 'package:todo/view/view_exporter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().initNotification();
+  tz.initializeTimeZones();
+
   await openBox();
 
   runApp(const MyApp());
@@ -28,6 +31,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/home', page: () => HomeScreen()),
+        GetPage(name: '/event', page: () => CreateEventScreen()),
       ],
     );
   }
