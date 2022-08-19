@@ -44,15 +44,17 @@ class EventListTileWWidget extends StatelessWidget {
           ),
         ),
       ),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 600),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         decoration: BoxDecoration(
+          color: isDone ? todoColors.lightYellow : todoColors.lightGrey,
           border: Border.all(
             color: isDone ? todoColors.darkYellow : todoColors.darkGrey,
             width: 1,
           ),
           borderRadius:
-              isDone ? BorderRadius.circular(80) : BorderRadius.circular(10),
+              isDone ? BorderRadius.circular(80) : BorderRadius.circular(20),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,14 +90,16 @@ class EventListTileWWidget extends StatelessWidget {
                   remindMe
                       ? Text(
                           DateFormat("HH:mm").format(dateTime),
-                          style: Theme.of(context).textTheme.titleSmall,
+                          style: Theme.of(context).textTheme.bodySmall,
                         )
-                      : const SizedBox(),
+                      : const SizedBox(
+                          height: 0,
+                        ),
                   Text(
                     description,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.titleSmall,
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ],
               ),

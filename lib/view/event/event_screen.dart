@@ -51,15 +51,19 @@ class CreateEventScreen extends StatelessWidget {
                             controller.remindMe.value = remindInNewValue,
                       )
                     : const SizedBox(),
-                _eventController.remindMe.value
-                    ? AlarmSectionColumnWidget(
-                        initialDateTimeForSelector:
-                            _eventController.selectedDay.value,
-                        remindInFunction: (value) => remindIn = value,
-                        cupertinoDatePickerFunction: (value) =>
-                            pickedDateTime = value,
-                      )
-                    : const SizedBox(height: 20),
+                AnimatedOpacity(
+                  opacity: _eventController.remindMe.value ? 1.0 : 0.0,
+                  duration: const Duration(milliseconds: 1000),
+                  child: _eventController.remindMe.value
+                      ? AlarmSectionColumnWidget(
+                          initialDateTimeForSelector:
+                              _eventController.selectedDay.value,
+                          remindInFunction: (value) => remindIn = value,
+                          cupertinoDatePickerFunction: (value) =>
+                              pickedDateTime = value,
+                        )
+                      : const SizedBox(height: 20),
+                ),
                 PrioritySectionRowWidget(
                   eventPrioritySelectorFunction: (value) =>
                       selectedPriority = value,

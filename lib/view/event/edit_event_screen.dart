@@ -62,17 +62,21 @@ class _EditEventScreenState extends State<EditEventScreen> {
                       },
                     )
                   : const SizedBox(),
-              editingEvent.remindMe
-                  ? AlarmSectionColumnWidget(
-                      initialDateTimeForSelector: editingEvent.dateTime,
-                      remindInFunction: (value) =>
-                          editingEvent.remindIn = value,
-                      cupertinoDatePickerFunction: (DateTime value) {
-                        if (value.hour >= editingEvent.dateTime.hour) {
-                          editingEvent.dateTime = value;
-                        }
-                      })
-                  : const SizedBox(height: 20),
+              AnimatedOpacity(
+                opacity: editingEvent.remindMe ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 1000),
+                child: editingEvent.remindMe
+                    ? AlarmSectionColumnWidget(
+                        initialDateTimeForSelector: editingEvent.dateTime,
+                        remindInFunction: (value) =>
+                            editingEvent.remindIn = value,
+                        cupertinoDatePickerFunction: (DateTime value) {
+                          if (value.hour >= editingEvent.dateTime.hour) {
+                            editingEvent.dateTime = value;
+                          }
+                        })
+                    : const SizedBox(height: 20),
+              ),
               PrioritySectionRowWidget(
                 eventPrioritySelectorFunction: (value) =>
                     editingEvent.priority = value,

@@ -19,7 +19,6 @@ class ReminderSectionRowWidget extends StatelessWidget {
               : Icons.notifications_rounded,
           color: todoColors.darkGrey,
         ),
-        const SizedBox(width: 5),
         Text(
           "Remind Me",
           style: Theme.of(context).textTheme.titleSmall,

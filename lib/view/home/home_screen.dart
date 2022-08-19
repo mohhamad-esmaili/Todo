@@ -24,6 +24,7 @@ class HomeScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               TableCalendarWidget(),
+              const SizedBox(height: 10),
               controller.firstLoad.value
                   ? SizedBox(
                       child: Center(

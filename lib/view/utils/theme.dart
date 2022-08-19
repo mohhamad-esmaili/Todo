@@ -22,6 +22,10 @@ class AppTheme {
         fontSize: 15,
         color: textColors.darkTextColor,
       ),
+      bodySmall: TextStyle(
+        fontSize: 15,
+        color: textColors.darkTextColor,
+      ),
     ),
     // -----------------------
 
@@ -61,11 +65,15 @@ class AppTheme {
       ),
       titleMedium: TextStyle(
         fontSize: 20,
-        color: textColors.lightTextColor,
+        color: textColors.darkTextColor,
       ),
       titleSmall: TextStyle(
         fontSize: 15,
         color: textColors.lightTextColor,
+      ),
+      bodySmall: TextStyle(
+        fontSize: 15,
+        color: textColors.darkTextColor,
       ),
     ),
     // -----------------------
