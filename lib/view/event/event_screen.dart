@@ -24,6 +24,7 @@ class CreateEventScreen extends StatelessWidget {
         title: const Text('Add Todo'),
         leading: IconButton(
           onPressed: () {
+            Get.closeAllSnackbars();
             Get.back();
           },
           icon: Icon(
@@ -36,6 +37,7 @@ class CreateEventScreen extends StatelessWidget {
         builder: (controller) => Container(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Column(
               children: [
                 TitleTextformfieldWidget(
@@ -59,7 +61,7 @@ class CreateEventScreen extends StatelessWidget {
                           initialDateTimeForSelector:
                               _eventController.selectedDay.value,
                           remindInFunction: (value) => remindIn = value,
-                          cupertinoDatePickerFunction: (value) =>
+                          cupertinoDatePickerFunction: (DateTime value) =>
                               pickedDateTime = value,
                         )
                       : const SizedBox(height: 20),
@@ -72,18 +74,27 @@ class CreateEventScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     if (_titleEditingController.text.isNotEmpty) {
-                      _eventController.createItem(
-                        dateTime: pickedDateTime,
-                        title: _titleEditingController.text,
-                        description: _descriptionEditingCotroller.text,
-                        priority: selectedPriority,
-                        remindMe: _eventController.remindMe.value,
-                        remindIn: remindIn,
-                      );
-                      _titleEditingController.clear();
-                      _descriptionEditingCotroller.clear();
-                      _eventController.remindMe.value = false;
-                      Get.back();
+                      if (checkTimes(
+                              pickedDateTime,
+                              _eventController.selectedDay.value,
+                              _eventController.remindMe.value) ==
+                          true) {
+                        _eventController.createItem(
+                          dateTime: pickedDateTime,
+                          title: _titleEditingController.text,
+                          description: _descriptionEditingCotroller.text,
+                          priority: selectedPriority,
+                          remindMe: _eventController.remindMe.value,
+                          remindIn: remindIn,
+                        );
+                        _titleEditingController.clear();
+                        _descriptionEditingCotroller.clear();
+                        _eventController.remindMe.value = false;
+                        Get.closeAllSnackbars();
+                        Get.back();
+                      } else {
+                        showErrorNotification();
+                      }
                     }
                   },
                   child: const InkwellChildSaveBTNWidget(title: "SAVE"),

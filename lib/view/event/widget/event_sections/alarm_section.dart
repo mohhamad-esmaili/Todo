@@ -40,11 +40,8 @@ class AlarmSectionColumnWidget extends StatelessWidget {
         SizedBox(
           height: 200,
           child: CupertinoDatePicker(
-            use24hFormat: true,
             initialDateTime: initialDateTimeForSelector,
-            minimumDate: DateTime.now() == initialDateTimeForSelector
-                ? initialDateTimeForSelector
-                : null,
+            use24hFormat: true,
             mode: CupertinoDatePickerMode.time,
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             onDateTimeChanged: (DateTime value) =>

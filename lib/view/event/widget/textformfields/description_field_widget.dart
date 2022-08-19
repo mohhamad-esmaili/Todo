@@ -9,7 +9,7 @@ class DescriptionTextformfieldWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      maxLines: 7,
+      maxLines: 8,
       controller: descriptionEditingCotroller,
       textInputAction: TextInputAction.newline,
       style: Theme.of(context).textTheme.bodyMedium,

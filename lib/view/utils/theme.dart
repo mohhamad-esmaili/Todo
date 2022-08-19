@@ -100,7 +100,7 @@ class AppTheme {
     appBarTheme: AppBarTheme(
       backgroundColor: mainColors.blackScaffoldColor,
       elevation: 0,
-      toolbarHeight: 110,
+      toolbarHeight: 80,
       titleTextStyle: TextStyle(
         fontSize: 23,
         fontWeight: FontWeight.bold,

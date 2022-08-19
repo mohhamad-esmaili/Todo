@@ -32,7 +32,7 @@ class EventListTileWWidget extends StatelessWidget {
       onDismissed: (direction) => controller.deleteEvent(index),
       background: Container(
         alignment: Alignment.centerRight,
-        margin: EdgeInsets.only(bottom: 20),
+        margin: const EdgeInsets.only(bottom: 20),
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
@@ -52,7 +52,7 @@ class EventListTileWWidget extends StatelessWidget {
           color: isDone ? todoColors.lightYellow : todoColors.lightGrey,
           border: Border.all(
             color: isDone ? todoColors.darkYellow : todoColors.darkGrey,
-            width: 1,
+            width: 1.5,
           ),
           borderRadius:
               isDone ? BorderRadius.circular(80) : BorderRadius.circular(20),
@@ -68,7 +68,7 @@ class EventListTileWWidget extends StatelessWidget {
                     ? null
                     : BoxDecoration(
                         border:
-                            Border.all(color: todoColors.darkGrey, width: 1),
+                            Border.all(color: todoColors.darkGrey, width: 1.5),
                         borderRadius: BorderRadius.circular(30),
                       ),
                 child: Icon(

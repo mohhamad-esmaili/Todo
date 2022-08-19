@@ -38,8 +38,8 @@ class EventController extends GetxController {
       required Color priority,
       required int remindIn,
       required bool remindMe}) async {
-    if (items[dateTime] != null) {
-      items[dateTime].add(Event(
+    if (items[selectedDay.value] != null) {
+      items[selectedDay.value].add(Event(
         id: randomNumber,
         title: title,
         description: description,
@@ -106,6 +106,8 @@ class EventController extends GetxController {
     return editingList[index];
   }
 
+  /// this function will edit a single event and save to box
+  /// it needs the `int index` of the event and new event as `Event`
   void editEvent({required int index, required Event newEvent}) async {
     List<dynamic> eventList = items[selectedDay.value];
     Event editedEvent = eventList[index];
@@ -126,6 +128,7 @@ class EventController extends GetxController {
     refreshItems();
   }
 
+  /// this function save ReorderableListView and replace the index of events
   void reorderEvents(int oldIndex, int newIndex) async {
     if (newIndex > oldIndex) {
       newIndex = newIndex - 1;

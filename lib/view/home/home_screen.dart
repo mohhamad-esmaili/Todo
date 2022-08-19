@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
       ),
       body: GetX<EventController>(
         builder: (controller) => SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

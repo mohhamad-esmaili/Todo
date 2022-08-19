@@ -58,6 +58,7 @@ with `GetX` and `Hive` and pushing notification with `flutter_local_notification
     │   ├───event_screen.dart
     │   ├───edit_event_screen.dart
     │   └───widgets
+    │        ├───utils.dart
     │        ├───event_sections
     │        ├───selectors_widget
     │        └───textformfields

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo/controller/event_controller.dart';
 import 'package:todo/model/event_model.dart';
+
 import 'package:todo/view/event/widget/widget_exporter.dart';
 
 class EditEventScreen extends StatefulWidget {
@@ -27,12 +28,14 @@ class _EditEventScreenState extends State<EditEventScreen> {
     final Event editingEvent = _eventController.getEditingEvent(index);
     _titleEditingController.text = editingEvent.title;
     _descriptionEditingCotroller.text = editingEvent.description;
+    DateTime pickedDateTime = _eventController.selectedDay.value;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text('Edit Todo'),
         leading: IconButton(
           onPressed: () {
+            Get.closeAllSnackbars();
             Get.back();
           },
           icon: Icon(
@@ -44,6 +47,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               TitleTextformfieldWidget(
@@ -70,11 +74,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
                         initialDateTimeForSelector: editingEvent.dateTime,
                         remindInFunction: (value) =>
                             editingEvent.remindIn = value,
-                        cupertinoDatePickerFunction: (DateTime value) {
-                          if (value.hour >= editingEvent.dateTime.hour) {
-                            editingEvent.dateTime = value;
-                          }
-                        })
+                        cupertinoDatePickerFunction: (DateTime value) =>
+                            pickedDateTime = value)
                     : const SizedBox(height: 20),
               ),
               PrioritySectionRowWidget(
@@ -85,13 +86,20 @@ class _EditEventScreenState extends State<EditEventScreen> {
               InkWell(
                 onTap: () {
                   if (_titleEditingController.text.isNotEmpty) {
-                    editingEvent.title = _titleEditingController.text;
-                    editingEvent.description =
-                        _descriptionEditingCotroller.text;
-                    _eventController.editEvent(
-                        index: index, newEvent: editingEvent);
-                    _titleEditingController.clear();
-                    Get.back();
+                    if (checkTimes(pickedDateTime, editingEvent.dateTime,
+                        editingEvent.remindMe)) {
+                      editingEvent.dateTime = pickedDateTime;
+                      editingEvent.title = _titleEditingController.text;
+                      editingEvent.description =
+                          _descriptionEditingCotroller.text;
+                      _eventController.editEvent(
+                          index: index, newEvent: editingEvent);
+                      _titleEditingController.clear();
+                      Get.closeAllSnackbars();
+                      Get.back();
+                    } else {
+                      showErrorNotification();
+                    }
                   }
                 },
                 child: const InkwellChildSaveBTNWidget(title: "EDIT"),
