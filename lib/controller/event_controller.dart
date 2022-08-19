@@ -125,4 +125,15 @@ class EventController extends GetxController {
     await _eventBox.put('events', items);
     refreshItems();
   }
+
+  void reorderEvents(int oldIndex, int newIndex) async {
+    if (newIndex > oldIndex) {
+      newIndex = newIndex - 1;
+    }
+    List removedEvent = items[selectedDay.value];
+    Event reorderedEvent = removedEvent.removeAt(oldIndex);
+    removedEvent.insert(newIndex, reorderedEvent);
+    await _eventBox.put('events', items);
+    refreshItems();
+  }
 }

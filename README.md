@@ -12,7 +12,7 @@ To do
 Simple todo app with notification
 with `GetX` and `Hive` and pushing notification with `flutter_local_notifications`.
 
-Ui adapted from [Rita Deyneko](https://dribbble.com/shots/5084136-DailyUi-042-ToDo-List)
+### Ui adapted from [Rita Deyneko](https://dribbble.com/shots/5084136-DailyUi-042-ToDo-List)
 
 
 ### Packages used in project :
@@ -88,6 +88,7 @@ Ui adapted from [Rita Deyneko](https://dribbble.com/shots/5084136-DailyUi-042-To
 - [x] notification service
 - [x] event edit page
 - [ ] compatible version for ios
+- [ ] add done button and share button in edit event
 - [ ] implement motivation quote 
 - [ ] add recycle bin page on drawer 
 - [ ] multie language 

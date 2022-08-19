@@ -9,8 +9,8 @@ const double _fontSize = 20.0;
 class CalendarTheme {
   static const CalendarFormat calendarThemeFormat = CalendarFormat.week;
   static final calendarDayOfWeekTheme = DaysOfWeekStyle(
-    weekdayStyle: TextStyle(color: textColors.calendarTextColor),
-    weekendStyle: TextStyle(color: textColors.calendarTextColor),
+    weekdayStyle: TextStyle(fontSize: 15, color: textColors.calendarTextColor),
+    weekendStyle: TextStyle(fontSize: 15, color: textColors.calendarTextColor),
   );
 
   static final calendarLightMode = CalendarStyle(

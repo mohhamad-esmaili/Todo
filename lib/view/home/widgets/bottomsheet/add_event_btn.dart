@@ -27,6 +27,7 @@ class AddEventBTN extends StatelessWidget {
           child: Text(
             "What do you need to do?",
             style: TextStyle(
+              fontSize: 15,
               color: Colors.grey[500],
             ),
           ),

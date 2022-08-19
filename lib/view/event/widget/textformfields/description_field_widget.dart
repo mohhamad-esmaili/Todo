@@ -12,6 +12,7 @@ class DescriptionTextformfieldWidget extends StatelessWidget {
       maxLines: 7,
       controller: descriptionEditingCotroller,
       textInputAction: TextInputAction.newline,
+      style: Theme.of(context).textTheme.bodyMedium,
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(vertical: 15, horizontal: 13),

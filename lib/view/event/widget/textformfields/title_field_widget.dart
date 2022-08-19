@@ -13,6 +13,7 @@ class TitleTextformfieldWidget extends StatelessWidget {
       autofocus: true,
       controller: titleEditingController,
       textInputAction: TextInputAction.next,
+      style: Theme.of(context).textTheme.bodyMedium,
       decoration: InputDecoration(
         contentPadding:
             const EdgeInsets.symmetric(vertical: 15, horizontal: 13),

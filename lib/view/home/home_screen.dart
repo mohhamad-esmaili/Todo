@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:todo/controller/event_controller.dart';
 
 import 'package:todo/view/home/widgets/widget_exporter.dart';
+import 'package:todo/view/utils/colors.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -37,34 +38,45 @@ class HomeScreen extends StatelessWidget {
                   : Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 5, horizontal: 15),
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        reverse: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: controller
-                            .getEventsFromDate(controller.selectedDay.value)
-                            .length,
-                        separatorBuilder: (context, index) => const SizedBox(
-                          height: 6,
+                      child: Theme(
+                        data: Theme.of(context).copyWith(
+                          canvasColor: todoColors.lightGrey,
+                          shadowColor: todoColors.darkGrey,
                         ),
-                        itemBuilder: (BuildContext context, int index) {
-                          List allEvents = controller
-                              .getEventsFromDate(controller.selectedDay.value);
+                        child: ReorderableListView.builder(
+                          onReorder: (oldIndex, newIndex) =>
+                              controller.reorderEvents(oldIndex, newIndex),
+                          anchor: 1,
+                          shrinkWrap: true,
+                          reverse: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          clipBehavior: Clip.none,
+                          itemCount: controller
+                              .getEventsFromDate(controller.selectedDay.value)
+                              .length,
+                          itemBuilder: (BuildContext context, int index) {
+                            List allEvents = controller.getEventsFromDate(
+                                controller.selectedDay.value);
 
-                          return InkWell(
-                            onTap: () =>
-                                Get.toNamed('/edit-event', arguments: index),
-                            child: EventListTileWWidget(
-                              index: index,
-                              dateTime: allEvents[index].dateTime,
-                              title: allEvents[index].title,
-                              description: allEvents[index].description,
-                              priority: allEvents[index].priority,
-                              isDone: allEvents[index].isDone,
-                              remindMe: allEvents[index].remindMe,
-                            ),
-                          );
-                        },
+                            return InkWell(
+                              key: ValueKey(index),
+                              onTap: () =>
+                                  Get.toNamed('/edit-event', arguments: index),
+                              child: Container(
+                                margin: const EdgeInsets.symmetric(vertical: 5),
+                                child: EventListTileWWidget(
+                                  index: index,
+                                  dateTime: allEvents[index].dateTime,
+                                  title: allEvents[index].title,
+                                  description: allEvents[index].description,
+                                  priority: allEvents[index].priority,
+                                  isDone: allEvents[index].isDone,
+                                  remindMe: allEvents[index].remindMe,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ),
               const SizedBox(height: 100),

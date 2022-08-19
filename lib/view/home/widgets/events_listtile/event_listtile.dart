@@ -32,6 +32,7 @@ class EventListTileWWidget extends StatelessWidget {
       onDismissed: (direction) => controller.deleteEvent(index),
       background: Container(
         alignment: Alignment.centerRight,
+        margin: EdgeInsets.only(bottom: 20),
         child: Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(

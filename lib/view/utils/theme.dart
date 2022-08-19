@@ -15,11 +15,15 @@ class AppTheme {
         color: textColors.darkTextColor,
       ),
       titleMedium: TextStyle(
-        fontSize: 20,
+        fontSize: 18,
         color: textColors.darkTextColor,
       ),
       titleSmall: TextStyle(
         fontSize: 15,
+        color: textColors.darkTextColor,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 17,
         color: textColors.darkTextColor,
       ),
       bodySmall: TextStyle(
@@ -43,7 +47,7 @@ class AppTheme {
     appBarTheme: AppBarTheme(
       backgroundColor: mainColors.whiteScaffoldColor,
       elevation: 0,
-      toolbarHeight: 110,
+      toolbarHeight: 80,
       iconTheme: IconThemeData(color: mainColors.blackScaffoldColor),
       titleTextStyle: TextStyle(
         fontSize: 23,
@@ -64,11 +68,15 @@ class AppTheme {
         color: textColors.lightTextColor,
       ),
       titleMedium: TextStyle(
-        fontSize: 20,
+        fontSize: 18,
         color: textColors.darkTextColor,
       ),
       titleSmall: TextStyle(
         fontSize: 15,
+        color: textColors.lightTextColor,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 17,
         color: textColors.lightTextColor,
       ),
       bodySmall: TextStyle(
