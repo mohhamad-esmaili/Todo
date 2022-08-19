@@ -12,6 +12,7 @@ To do
 Simple todo app with notification
 with `GetX` and `Hive` and pushing notification with `flutter_local_notifications`.
 
+![poster](media/todoapp-poster.png) 
 ### Ui adapted from [Rita Deyneko](https://dribbble.com/shots/5084136-DailyUi-042-ToDo-List)
 
 
