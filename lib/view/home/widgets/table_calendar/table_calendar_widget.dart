@@ -36,7 +36,7 @@ class TableCalendarWidget extends StatelessWidget {
         selectedDayPredicate: (DateTime date) {
           return isSameDay(controller.selectedDay.value, date);
         },
-        eventLoader: controller.getEvents,
+        eventLoader: controller.getEventsFromDate,
       ),
     );
   }

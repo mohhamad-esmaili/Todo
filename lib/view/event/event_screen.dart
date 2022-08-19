@@ -25,7 +25,6 @@ class CreateEventScreen extends StatelessWidget {
         leading: IconButton(
           onPressed: () {
             Get.back();
-            _eventController.remindMe.value = false;
           },
           icon: Icon(
             Icons.close_rounded,
@@ -78,11 +77,12 @@ class CreateEventScreen extends StatelessWidget {
                         remindIn: remindIn,
                       );
                       _titleEditingController.clear();
+                      _descriptionEditingCotroller.clear();
                       _eventController.remindMe.value = false;
                       Get.back();
                     }
                   },
-                  child: const InkwellChildSaveBTNWidget(),
+                  child: const InkwellChildSaveBTNWidget(title: "SAVE"),
                 ),
                 const SizedBox(height: 30),
               ],
@@ -92,12 +92,4 @@ class CreateEventScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-bool checkIfTimeIsEqual(DateTime dateTime) {
-  final DateTime nowDateTime = DateTime.now();
-  if (dateTime.day >= nowDateTime.day) {
-    return true;
-  }
-  return false;
 }

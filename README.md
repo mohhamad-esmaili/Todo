@@ -56,6 +56,7 @@ Ui adapted from [Rita Deyneko](https://dribbble.com/shots/5084136-DailyUi-042-To
     │        └───table_calendar
     ├───event
     │   ├───event_screen.dart
+    │   ├───edit_event_screen.dart
     │   └───widgets
     │        ├───event_sections
     │        ├───selectors_widget
@@ -85,11 +86,13 @@ Ui adapted from [Rita Deyneko](https://dribbble.com/shots/5084136-DailyUi-042-To
 - [x] theme controller - convert to darkmode
 - [x] save events on hive
 - [x] notification service
-- [ ] calendar show events on first load
+- [x] event edit page
 - [ ] compatible version for ios
 - [ ] implement motivation quote 
 - [ ] add recycle bin page on drawer 
+- [ ] multie language 
 - [ ] implement tags and search on tags 
+- [ ] calendar show events on first load (tablecalendar bug)
 
 
 

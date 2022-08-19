@@ -41,23 +41,27 @@ class HomeScreen extends StatelessWidget {
                         reverse: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: controller
-                            .getEvents(controller.selectedDay.value)
+                            .getEventsFromDate(controller.selectedDay.value)
                             .length,
                         separatorBuilder: (context, index) => const SizedBox(
                           height: 6,
                         ),
                         itemBuilder: (BuildContext context, int index) {
                           List allEvents = controller
-                              .getEvents(controller.selectedDay.value);
+                              .getEventsFromDate(controller.selectedDay.value);
 
-                          return EventListTileWWidget(
-                            index: index,
-                            dateTime: allEvents[index].dateTime,
-                            title: allEvents[index].title,
-                            description: allEvents[index].description,
-                            priority: allEvents[index].priority,
-                            isDone: allEvents[index].isDone,
-                            remindMe: allEvents[index].remindMe,
+                          return InkWell(
+                            onTap: () =>
+                                Get.toNamed('/edit-event', arguments: index),
+                            child: EventListTileWWidget(
+                              index: index,
+                              dateTime: allEvents[index].dateTime,
+                              title: allEvents[index].title,
+                              description: allEvents[index].description,
+                              priority: allEvents[index].priority,
+                              isDone: allEvents[index].isDone,
+                              remindMe: allEvents[index].remindMe,
+                            ),
                           );
                         },
                       ),

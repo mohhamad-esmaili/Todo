@@ -58,7 +58,7 @@ class EventListTileWWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
-              onTap: () => controller.makeDoneEvent(index),
+              onTap: () => controller.setEventDone(index),
               child: Container(
                 padding: const EdgeInsets.all(6),
                 decoration: isDone

@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:math';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
@@ -73,13 +72,13 @@ class EventController extends GetxController {
   }
 
   /// It creats todoEvent with [DateTime] parameter.
-  List<Event> getEvents(DateTime date) {
+  List<Event> getEventsFromDate(DateTime date) {
     return List<Event>.from(items[date] ?? []);
   }
 
   /// make an event done, it makes isDone attribute to true
   /// `int index` parameter needs.
-  void makeDoneEvent(int index) async {
+  void setEventDone(int index) async {
     List<dynamic> eventList = items[selectedDay.value];
     Event editedEvent = eventList[index];
     editedEvent.isDone = !editedEvent.isDone;
@@ -96,6 +95,33 @@ class EventController extends GetxController {
     Event singleEvent = removedEvent[index];
     removedEvent.removeAt(index);
     NotificationService().cancelNotitication(singleEvent.id);
+    await _eventBox.put('events', items);
+    refreshItems();
+  }
+
+  /// edit event and save to box
+  /// it needs `int` index of event in list
+  Event getEditingEvent(int index) {
+    List<Event> editingList = getEventsFromDate(selectedDay.value);
+    return editingList[index];
+  }
+
+  void editEvent({required int index, required Event newEvent}) async {
+    List<dynamic> eventList = items[selectedDay.value];
+    Event editedEvent = eventList[index];
+    editedEvent = newEvent;
+    editedEvent.title = newEvent.title;
+    if (newEvent.remindMe) {
+      NotificationService().cancelNotitication(newEvent.id);
+      NotificationService().showNotification(
+          randomNumber,
+          newEvent.title,
+          newEvent.description,
+          newEvent.dateTime,
+          newEvent.priority,
+          newEvent.remindIn);
+    }
+
     await _eventBox.put('events', items);
     refreshItems();
   }

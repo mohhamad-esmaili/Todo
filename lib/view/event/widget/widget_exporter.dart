@@ -5,3 +5,11 @@ export 'package:todo/view/event/widget/event_sections/reminder_section.dart';
 
 export 'package:todo/view/event/widget/textformfields/description_field_widget.dart';
 export 'package:todo/view/event/widget/textformfields/title_field_widget.dart';
+
+bool checkIfTimeIsEqual(DateTime dateTime) {
+  final DateTime nowDateTime = DateTime.now();
+  if (dateTime.day >= nowDateTime.day) {
+    return true;
+  }
+  return false;
+}

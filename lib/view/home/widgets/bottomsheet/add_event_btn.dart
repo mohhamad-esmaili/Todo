@@ -8,7 +8,7 @@ class AddEventBTN extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.toNamed('/event'),
+      onTap: () => Get.toNamed('/event', arguments: [false]),
       child: Container(
         color: Theme.of(context).scaffoldBackgroundColor,
         child: Container(

@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/home', page: () => HomeScreen()),
         GetPage(name: '/event', page: () => CreateEventScreen()),
+        GetPage(name: '/edit-event', page: () => EditEventScreen()),
       ],
     );
   }

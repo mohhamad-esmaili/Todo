@@ -47,7 +47,8 @@ class AlarmSectionColumnWidget extends StatelessWidget {
                 : null,
             mode: CupertinoDatePickerMode.time,
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            onDateTimeChanged: (value) => cupertinoDatePickerFunction(value),
+            onDateTimeChanged: (DateTime value) =>
+                cupertinoDatePickerFunction(value),
           ),
         )
       ],
