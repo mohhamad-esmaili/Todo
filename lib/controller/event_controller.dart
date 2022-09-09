@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:todo/model/event_model.dart';
 import 'package:todo/controller/hive_initializer.dart';
 import 'package:todo/service/notification_service.dart';
+import 'package:todo/service/quote_service.dart';
 
 class EventController extends GetxController {
   Map<dynamic, dynamic> items = {};

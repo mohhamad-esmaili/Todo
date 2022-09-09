@@ -18,7 +18,7 @@ class NotificationService {
 
   Future<void> initNotification() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('todo_logo');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
     const InitializationSettings initializationSettings =
         InitializationSettings(
@@ -48,7 +48,7 @@ class NotificationService {
           channelDescription: "todo reminder",
           playSound: true,
           color: priority,
-          icon: 'todo_logo',
+          icon: '@mipmap/ic_launcher',
           importance: Importance.max,
           priority: Priority.max,
         ),

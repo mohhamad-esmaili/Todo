@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:todo/view/utils/colors.dart';
 
 class AppTheme {
   static final lightTheme = ThemeData(
-    fontFamily: 'PTSans',
+    fontFamily: GoogleFonts.ptSans().fontFamily,
     scaffoldBackgroundColor: mainColors.whiteScaffoldColor,
 
     // textTheme start here --
@@ -57,7 +58,7 @@ class AppTheme {
     ),
   );
   static final darkTheme = ThemeData(
-    fontFamily: 'PTSans',
+    fontFamily: GoogleFonts.ptSans().fontFamily,
     scaffoldBackgroundColor: mainColors.blackScaffoldColor,
 
     // textTheme start here --

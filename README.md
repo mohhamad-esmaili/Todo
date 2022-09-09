@@ -21,16 +21,18 @@ with `GetX` and `Hive` and pushing notification with `flutter_local_notification
 - [flutter_svg](https://pub.dev/packages/flutter_svg)
 - [hive_flutter](https://pub.dev/packages/hive_flutter)
 - [intl](https://pub.dev/packages/intl)
-- [hive](https://pub.dev/packages/hive)
-- [get](https://pub.dev/packages/get)
 - [loading_animation_widget](https://pub.dev/packages/loading_animation_widget)
 - [path_provider](https://pub.dev/packages/path_provider)
 - [table_calendar](https://pub.dev/packages/table_calendar)
 - [timezone](https://pub.dev/packages/timezone)
+- [google_fonts](https://pub.dev/packages/google_fonts)
+- [http](https://pub.dev/packages/http)
 
 
-
-
+### How to use:
+1. run `flutter pub get` to get packages
+2. run `flutter packages pub run build_runner build`
+> flutter
 
 ### Folder Structure (lib) :
 ```
@@ -91,7 +93,7 @@ with `GetX` and `Hive` and pushing notification with `flutter_local_notification
 - [x] event edit page
 - [ ] compatible version for ios
 - [ ] add done button and share button in edit event
-- [ ] implement motivation quote 
+- [x] implement motivation quote to drawer
 - [ ] add recycle bin page on drawer 
 - [ ] multie language 
 - [ ] implement tags and search on tags 

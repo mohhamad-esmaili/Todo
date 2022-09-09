@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:todo/controller/theme_controller.dart';
+import 'package:todo/service/quote_service.dart';
 import 'package:todo/view/utils/colors.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -21,16 +22,32 @@ class DrawerWidget extends StatelessWidget {
             // height: 200,
             color: todoColors.lightGrey,
             alignment: Alignment.center,
-            padding: const EdgeInsets.only(top: 50, bottom: 50),
+            padding:
+                const EdgeInsets.only(top: 50, left: 50, right: 50, bottom: 50),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SvgPicture.asset('assets/images/logo.svg', width: 50),
-                const Text(
-                  'do what you need to do ;)',
-                  style: TextStyle(fontSize: 20, color: Color(0xff464646)),
-                )
+                const SizedBox(height: 10),
+                FutureBuilder(
+                    future: QuoteService().fetchQuoteFromServer(),
+                    builder:
+                        (BuildContext context, AsyncSnapshot<String> snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(
+                          snapshot.data.toString(),
+                          style: Theme.of(context).textTheme.titleSmall,
+                          textAlign: TextAlign.left,
+                        );
+                      }
+
+                      return Center(
+                        child: CircularProgressIndicator(
+                          color: TodoColors().darkPurple,
+                        ),
+                      );
+                    }),
               ],
             ),
           ),

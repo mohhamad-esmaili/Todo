@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:todo/controller/event_controller.dart';
+import 'package:todo/service/quote_service.dart';
 
 import 'package:todo/view/home/widgets/widget_exporter.dart';
 import 'package:todo/view/utils/colors.dart';
