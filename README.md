@@ -27,7 +27,7 @@ with `GetX` and `Hive` and pushing notification with `flutter_local_notification
 - [timezone](https://pub.dev/packages/timezone)
 - [google_fonts](https://pub.dev/packages/google_fonts)
 - [http](https://pub.dev/packages/http)
-
+- [share_plus](https://pub.dev/packages/share_plus)
 
 ### How to use:
 1. run `flutter pub get` to get packages
@@ -92,7 +92,7 @@ with `GetX` and `Hive` and pushing notification with `flutter_local_notification
 - [x] notification service
 - [x] event edit page
 - [ ] compatible version for ios
-- [ ] add done button and share button in edit event
+- [x] add done button and share button in edit event
 - [x] implement motivation quote to drawer
 - [ ] add recycle bin page on drawer 
 - [ ] multie language 

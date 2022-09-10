@@ -1,10 +1,10 @@
 import 'dart:math';
 import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:todo/model/event_model.dart';
 import 'package:todo/controller/hive_initializer.dart';
 import 'package:todo/service/notification_service.dart';
-import 'package:todo/service/quote_service.dart';
 
 class EventController extends GetxController {
   Map<dynamic, dynamic> items = {};
@@ -139,5 +139,17 @@ class EventController extends GetxController {
     removedEvent.insert(newIndex, reorderedEvent);
     await _eventBox.put('events', items);
     refreshItems();
+  }
+
+  void shareTask(Event shareEvent) {
+    Share.share('''
+                  task at ${shareEvent.dateTime} 
+title: ${shareEvent.title}
+
+description: ${shareEvent.description}
+                  
+                  
+made by Flutter, download from https://github.com/mohhamad-esmaili/Todo/releases/download/released/todo.apk
+                  ''', subject: 'Look at my task');
   }
 }

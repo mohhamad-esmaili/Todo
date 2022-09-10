@@ -30,18 +30,19 @@ class EventListTileWWidget extends StatelessWidget {
     return Dismissible(
       key: Key(title),
       onDismissed: (direction) => controller.deleteEvent(index),
-      background: Container(
-        alignment: Alignment.centerRight,
-        margin: const EdgeInsets.only(bottom: 20),
+      background: Center(
         child: Container(
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(40),
-            color: todoColors.lightRed,
-          ),
-          child: Icon(
-            Icons.delete,
-            color: todoColors.darkRed,
+          alignment: Alignment.centerRight,
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(40),
+              color: todoColors.lightRed,
+            ),
+            child: Icon(
+              Icons.delete,
+              color: todoColors.darkRed,
+            ),
           ),
         ),
       ),

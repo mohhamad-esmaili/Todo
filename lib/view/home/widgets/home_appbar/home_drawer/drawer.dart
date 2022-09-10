@@ -37,7 +37,7 @@ class DrawerWidget extends StatelessWidget {
                       if (snapshot.hasData) {
                         return Text(
                           snapshot.data.toString(),
-                          style: Theme.of(context).textTheme.titleSmall,
+                          style: Theme.of(context).textTheme.bodySmall,
                           textAlign: TextAlign.left,
                         );
                       }

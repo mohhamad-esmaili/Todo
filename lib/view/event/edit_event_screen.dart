@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:todo/controller/event_controller.dart';
 import 'package:todo/model/event_model.dart';
@@ -24,15 +23,22 @@ class _EditEventScreenState extends State<EditEventScreen> {
   final int index = Get.arguments;
 
   @override
+  void dispose() {
+    _titleEditingController.dispose();
+    _descriptionEditingCotroller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Event editingEvent = _eventController.getEditingEvent(index);
     _titleEditingController.text = editingEvent.title;
     _descriptionEditingCotroller.text = editingEvent.description;
     DateTime pickedDateTime = _eventController.selectedDay.value;
+    bool editedEventStatus = editingEvent.isDone;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Edit Todo'),
         leading: IconButton(
           onPressed: () {
             Get.closeAllSnackbars();
@@ -43,12 +49,96 @@ class _EditEventScreenState extends State<EditEventScreen> {
             color: Theme.of(context).iconTheme.color,
           ),
         ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Edit Todo',
+              style: Theme.of(context).appBarTheme.titleTextStyle,
+            ),
+            const Spacer(),
+            IconButton(
+              onPressed: () => _eventController.shareTask(editingEvent),
+              icon: Icon(
+                Icons.share,
+                color: Theme.of(context).iconTheme.color,
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  editedEventStatus = !editedEventStatus;
+                  editingEvent.isDone = editedEventStatus;
+                });
+              },
+              child: Container(
+                width: 25,
+                height: 25,
+                decoration: BoxDecoration(
+                  color: editingEvent.priority,
+                  borderRadius: BorderRadius.circular(40),
+                  border: Border.all(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    width: 1,
+                  ),
+                ),
+                child: editedEventStatus
+                    ? const Icon(
+                        Icons.check,
+                        color: Colors.black,
+                      )
+                    : null,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                Get.dialog(
+                  AlertDialog(
+                    title: Text(
+                      "Are you sure?!",
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    actionsAlignment: MainAxisAlignment.spaceAround,
+                    actions: [
+                      TextButton(
+                        onPressed: () => Get.back(),
+                        child: Text(
+                          "Cancel",
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          _eventController.deleteEvent(index);
+                          _titleEditingController.clear();
+                          _descriptionEditingCotroller.clear();
+
+                          Get.offAllNamed('/home');
+                        },
+                        child: Text(
+                          "Confirm",
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              icon: Icon(
+                Icons.delete,
+                color: Theme.of(context).iconTheme.color,
+              ),
+            )
+          ],
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TitleTextformfieldWidget(
                   titleEditingController: _titleEditingController),
@@ -95,6 +185,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                       _eventController.editEvent(
                           index: index, newEvent: editingEvent);
                       _titleEditingController.clear();
+                      _descriptionEditingCotroller.clear();
                       Get.closeAllSnackbars();
                       Get.back();
                     } else {
