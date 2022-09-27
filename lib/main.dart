@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:todo/controller/hive_initializer.dart';
+import 'package:todo/helpers/hive_initializer.dart';
 import 'package:todo/controller/theme_controller.dart';
 import 'package:todo/service/notification_service.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
       getPages: [
         GetPage(name: '/splash', page: () => const SplashScreen()),
         GetPage(name: '/home', page: () => HomeScreen()),
+        GetPage(name: '/recyclebin', page: () => RecycleScreen()),
         GetPage(name: '/event', page: () => CreateEventScreen()),
         GetPage(name: '/edit-event', page: () => const EditEventScreen()),
       ],

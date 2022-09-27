@@ -11,7 +11,9 @@ Future<List<Box>> openBox() async {
   Hive.registerAdapter(ColorAdapter());
   var eventBox = await Hive.openBox('events');
   var themeBox = await Hive.openBox("isDarkMode");
+  var deletedBox = await Hive.openBox("recycle_bin");
   boxList.add(eventBox);
   boxList.add(themeBox);
+  boxList.add(deletedBox);
   return boxList;
 }

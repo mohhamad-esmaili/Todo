@@ -31,7 +31,6 @@ Simple todo app by `GetX` and `Hive` and pushing notification with `flutter_loca
 ### How to use:
 1. run `flutter pub get` to get packages
 2. run `flutter packages pub run build_runner build`
-> flutter
 
 ### Folder Structure (lib) :
 ```

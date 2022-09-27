@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:todo/controller/event_controller.dart';
+import 'package:todo/helpers/helper.dart';
 import 'package:todo/view/event/widget/widget_exporter.dart';
 
 import 'package:todo/view/utils/colors.dart';
@@ -25,6 +26,7 @@ class CreateEventScreen extends StatelessWidget {
         leading: IconButton(
           onPressed: () {
             Get.closeAllSnackbars();
+            _eventController.remindMe.value = false;
             Get.back();
           },
           icon: Icon(
@@ -46,7 +48,7 @@ class CreateEventScreen extends StatelessWidget {
                 DescriptionTextformfieldWidget(
                     descriptionEditingCotroller: _descriptionEditingCotroller),
                 const SizedBox(height: 20),
-                checkIfTimeIsEqual(controller.selectedDay.value)
+                Helper().checkIfTimeIsEqual(controller.selectedDay.value)
                     ? ReminderSectionRowWidget(
                         remindMeBool: controller.remindMe.value,
                         switchReminderFunction: (remindInNewValue) =>
@@ -74,7 +76,7 @@ class CreateEventScreen extends StatelessWidget {
                 InkWell(
                   onTap: () {
                     if (_titleEditingController.text.isNotEmpty) {
-                      if (checkTimes(
+                      if (Helper().checkTimes(
                               pickedDateTime,
                               _eventController.selectedDay.value,
                               _eventController.remindMe.value) ==
@@ -93,7 +95,7 @@ class CreateEventScreen extends StatelessWidget {
                         Get.closeAllSnackbars();
                         Get.back();
                       } else {
-                        showErrorNotification();
+                        Helper().showErrorNotification();
                       }
                     }
                   },

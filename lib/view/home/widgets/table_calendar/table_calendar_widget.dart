@@ -8,7 +8,7 @@ import 'package:todo/view/utils/calendar_theme.dart';
 class TableCalendarWidget extends StatelessWidget {
   TableCalendarWidget({Key? key}) : super(key: key);
 
-  final EventController controller = Get.find<EventController>();
+  final EventController _eventController = Get.find<EventController>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class TableCalendarWidget extends StatelessWidget {
     // TODO: table calendar doesnt show events on first load
     return GetBuilder<ThemeController>(
       builder: (themeController) => TableCalendar(
-        focusedDay: controller.focusedDay.value,
+        focusedDay: _eventController.focusedDay.value,
         firstDay: DateTime(1990),
         lastDay: DateTime(2100),
         calendarFormat: CalendarTheme.calendarThemeFormat,
@@ -29,14 +29,14 @@ class TableCalendarWidget extends StatelessWidget {
             ? CalendarTheme.calendarDarkMode
             : CalendarTheme.calendarLightMode,
         onDaySelected: (DateTime selectDay, DateTime focusDay) {
-          controller.selectedDay.value = selectDay;
-          controller.focusedDay.value = focusDay;
-          controller.firstLoad.value = false;
+          _eventController.selectedDay.value = selectDay;
+          _eventController.focusedDay.value = focusDay;
+          _eventController.firstLoad.value = false;
         },
         selectedDayPredicate: (DateTime date) {
-          return isSameDay(controller.selectedDay.value, date);
+          return isSameDay(_eventController.selectedDay.value, date);
         },
-        eventLoader: controller.getEventsFromDate,
+        eventLoader: _eventController.getEventsFromDate,
       ),
     );
   }

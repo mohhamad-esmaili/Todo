@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo/controller/hive_initializer.dart';
+import 'package:todo/helpers/hive_initializer.dart';
 
 class ThemeController extends GetxController {
   final _key = 'isDarkMode';

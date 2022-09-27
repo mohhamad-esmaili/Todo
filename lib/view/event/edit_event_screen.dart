@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo/controller/event_controller.dart';
+import 'package:todo/helpers/helper.dart';
 import 'package:todo/model/event_model.dart';
 
 import 'package:todo/view/event/widget/widget_exporter.dart';
@@ -35,7 +36,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
     _titleEditingController.text = editingEvent.title;
     _descriptionEditingCotroller.text = editingEvent.description;
     DateTime pickedDateTime = _eventController.selectedDay.value;
-    bool editedEventStatus = editingEvent.isDone;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -58,36 +59,10 @@ class _EditEventScreenState extends State<EditEventScreen> {
             ),
             const Spacer(),
             IconButton(
-              onPressed: () => _eventController.shareTask(editingEvent),
+              onPressed: () => Helper().shareTask(editingEvent),
               icon: Icon(
                 Icons.share,
                 color: Theme.of(context).iconTheme.color,
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  editedEventStatus = !editedEventStatus;
-                  editingEvent.isDone = editedEventStatus;
-                });
-              },
-              child: Container(
-                width: 25,
-                height: 25,
-                decoration: BoxDecoration(
-                  color: editingEvent.priority,
-                  borderRadius: BorderRadius.circular(40),
-                  border: Border.all(
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                    width: 1,
-                  ),
-                ),
-                child: editedEventStatus
-                    ? const Icon(
-                        Icons.check,
-                        color: Colors.black,
-                      )
-                    : null,
               ),
             ),
             IconButton(
@@ -113,7 +88,6 @@ class _EditEventScreenState extends State<EditEventScreen> {
                           _eventController.deleteEvent(index);
                           _titleEditingController.clear();
                           _descriptionEditingCotroller.clear();
-
                           Get.offAllNamed('/home');
                         },
                         child: Text(
@@ -146,7 +120,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
               DescriptionTextformfieldWidget(
                   descriptionEditingCotroller: _descriptionEditingCotroller),
               const SizedBox(height: 20),
-              checkIfTimeIsEqual(_eventController.selectedDay.value)
+              Helper().checkIfTimeIsEqual(_eventController.selectedDay.value)
                   ? ReminderSectionRowWidget(
                       remindMeBool: editingEvent.remindMe,
                       switchReminderFunction: (remindInNewValue) {
@@ -176,8 +150,8 @@ class _EditEventScreenState extends State<EditEventScreen> {
               InkWell(
                 onTap: () {
                   if (_titleEditingController.text.isNotEmpty) {
-                    if (checkTimes(pickedDateTime, editingEvent.dateTime,
-                        editingEvent.remindMe)) {
+                    if (Helper().checkTimes(pickedDateTime,
+                        editingEvent.dateTime, editingEvent.remindMe)) {
                       editingEvent.dateTime = pickedDateTime;
                       editingEvent.title = _titleEditingController.text;
                       editingEvent.description =
@@ -189,7 +163,7 @@ class _EditEventScreenState extends State<EditEventScreen> {
                       Get.closeAllSnackbars();
                       Get.back();
                     } else {
-                      showErrorNotification();
+                      Helper().showErrorNotification();
                     }
                   }
                 },

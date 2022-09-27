@@ -1,18 +1,26 @@
 import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:todo/model/event_model.dart';
-import 'package:todo/controller/hive_initializer.dart';
+import 'package:todo/helpers/hive_initializer.dart';
 import 'package:todo/service/notification_service.dart';
 
 class EventController extends GetxController {
-  Map<dynamic, dynamic> items = {};
+  Map<dynamic, dynamic> _events = {};
+  List _recycleEvents = [];
+
   var selectedDay = DateTime.now().obs;
   var focusedDay = DateTime.now().obs;
-  final _eventBox = boxList[0];
   var remindMe = false.obs;
+
+  // variable to handle temperary tablecalendar bug
   RxBool firstLoad = true.obs;
+
+  // hive variables
+  final _eventBox = boxList[0];
+  final _deletedBox = boxList[2];
+  final String _eventKey = 'events';
+  final String _deletedEventKey = 'recyclebin';
 
   @override
   void onInit() {
@@ -22,8 +30,8 @@ class EventController extends GetxController {
 
   /// this refresh items by getting again from box
   void refreshItems() {
-    final value = _eventBox.get("events") ?? {};
-    items = value;
+    _events = _eventBox.get(_eventKey) ?? {};
+    _recycleEvents = _deletedBox.get(_deletedEventKey) ?? <Event>[];
     selectedDay.refresh();
     update();
   }
@@ -39,8 +47,8 @@ class EventController extends GetxController {
       required Color priority,
       required int remindIn,
       required bool remindMe}) async {
-    if (items[selectedDay.value] != null) {
-      items[selectedDay.value].add(Event(
+    if (_events[selectedDay.value] != null) {
+      _events[selectedDay.value].add(Event(
         id: randomNumber,
         title: title,
         description: description,
@@ -51,7 +59,7 @@ class EventController extends GetxController {
         isDone: false,
       ));
     } else {
-      items[selectedDay.value] = [
+      _events[selectedDay.value] = [
         Event(
           id: randomNumber,
           title: title,
@@ -68,36 +76,55 @@ class EventController extends GetxController {
       NotificationService().showNotification(
           randomNumber, title, description, dateTime, priority, remindIn);
     }
-    await _eventBox.put('events', items);
+    await _eventBox.put(_eventKey, _events);
     refreshItems();
   }
 
   /// It creats todoEvent with [DateTime] parameter.
   List<Event> getEventsFromDate(DateTime date) {
-    return List<Event>.from(items[date] ?? []);
+    return List<Event>.from(_events[date] ?? []);
   }
+
+  /// this function returns all events for recycle screen
+  List getDeletedEvent() => _recycleEvents;
 
   /// make an event done, it makes isDone attribute to true
   /// `int index` parameter needs.
   void setEventDone(int index) async {
-    List<dynamic> eventList = items[selectedDay.value];
+    List<dynamic> eventList = _events[selectedDay.value];
     Event editedEvent = eventList[index];
     editedEvent.isDone = !editedEvent.isDone;
 
     NotificationService().cancelNotitication(editedEvent.id);
-    await _eventBox.put('events', items);
+    await _eventBox.put(_eventKey, _events);
     refreshItems();
   }
 
   /// Delete an event from list and database
   /// it needs `int` index of event in list
   void deleteEvent(int index) async {
-    List removedEvent = items[selectedDay.value];
+    List removedEvent = _events[selectedDay.value];
     Event singleEvent = removedEvent[index];
     removedEvent.removeAt(index);
     NotificationService().cancelNotitication(singleEvent.id);
-    await _eventBox.put('events', items);
+    _recycleEvents.add(singleEvent);
+    await _eventBox.put(_eventKey, _events);
+    await _deletedBox.put(_deletedEventKey, _recycleEvents);
     refreshItems();
+  }
+
+  /// delete event for ever
+  void deleteEventForever(int index) async {
+    _recycleEvents.removeAt(index);
+    await _deletedBox.put(_deletedEventKey, _recycleEvents);
+    refreshItems();
+  }
+
+  void deleteAllRecycleEvents() async {
+    _recycleEvents.clear();
+    await _deletedBox.put(_deletedEventKey, _recycleEvents);
+    refreshItems();
+    update(["recycle_builder"]);
   }
 
   /// edit event and save to box
@@ -110,7 +137,7 @@ class EventController extends GetxController {
   /// this function will edit a single event and save to box
   /// it needs the `int index` of the event and new event as `Event`
   void editEvent({required int index, required Event newEvent}) async {
-    List<dynamic> eventList = items[selectedDay.value];
+    List<dynamic> eventList = _events[selectedDay.value];
     Event editedEvent = eventList[index];
     editedEvent = newEvent;
     editedEvent.title = newEvent.title;
@@ -125,7 +152,7 @@ class EventController extends GetxController {
           newEvent.remindIn);
     }
 
-    await _eventBox.put('events', items);
+    await _eventBox.put(_eventKey, _events);
     refreshItems();
   }
 
@@ -134,22 +161,10 @@ class EventController extends GetxController {
     if (newIndex > oldIndex) {
       newIndex = newIndex - 1;
     }
-    List removedEvent = items[selectedDay.value];
+    List removedEvent = _events[selectedDay.value];
     Event reorderedEvent = removedEvent.removeAt(oldIndex);
     removedEvent.insert(newIndex, reorderedEvent);
-    await _eventBox.put('events', items);
+    await _eventBox.put(_eventKey, _events);
     refreshItems();
-  }
-
-  void shareTask(Event shareEvent) {
-    Share.share('''
-                  task at ${shareEvent.dateTime} 
-title: ${shareEvent.title}
-
-description: ${shareEvent.description}
-                  
-                  
-made by Flutter, download from https://github.com/mohhamad-esmaili/Todo/releases/download/released/todo.apk
-                  ''', subject: 'Look at my task');
   }
 }

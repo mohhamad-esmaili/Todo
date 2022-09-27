@@ -4,16 +4,18 @@ import 'package:get/get.dart';
 import 'package:todo/controller/event_controller.dart';
 
 import 'package:todo/view/home/widgets/widget_exporter.dart';
+
 import 'package:todo/view/utils/colors.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({Key? key}) : super(key: key);
 
-  final EventController eventController = Get.put(EventController());
+  final EventController _eventController = Get.put(EventController());
   @override
   Widget build(BuildContext context) {
+    _eventController.remindMe.value = false;
     return Scaffold(
-      drawer: const DrawerWidget(),
+      drawer: DrawerWidget(),
       appBar: AppBar(
         leading: const DrawerIcon(),
         titleSpacing: 0,
@@ -73,6 +75,8 @@ class HomeScreen extends StatelessWidget {
                                   priority: allEvents[index].priority,
                                   isDone: allEvents[index].isDone,
                                   remindMe: allEvents[index].remindMe,
+                                  onDissmissFunction: () =>
+                                      controller.deleteEvent(index),
                                 ),
                               ),
                             );

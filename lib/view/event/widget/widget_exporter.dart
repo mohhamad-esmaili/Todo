@@ -5,5 +5,3 @@ export 'package:todo/view/event/widget/event_sections/reminder_section.dart';
 
 export 'package:todo/view/event/widget/textformfields/description_field_widget.dart';
 export 'package:todo/view/event/widget/textformfields/title_field_widget.dart';
-
-export 'package:todo/view/event/widget/utils.dart';

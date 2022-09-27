@@ -6,16 +6,17 @@ import 'package:todo/view/utils/colors.dart';
 import 'package:todo/controller/event_controller.dart';
 
 class EventListTileWWidget extends StatelessWidget {
-  EventListTileWWidget(
-      {Key? key,
-      required this.index,
-      required this.dateTime,
-      required this.title,
-      required this.description,
-      required this.priority,
-      required this.isDone,
-      required this.remindMe})
-      : super(key: key);
+  EventListTileWWidget({
+    Key? key,
+    required this.index,
+    required this.dateTime,
+    required this.title,
+    required this.description,
+    required this.priority,
+    required this.isDone,
+    required this.remindMe,
+    required this.onDissmissFunction,
+  }) : super(key: key);
   final int index;
   final DateTime dateTime;
   final String title;
@@ -23,13 +24,14 @@ class EventListTileWWidget extends StatelessWidget {
   final Color priority;
   final bool isDone;
   final bool remindMe;
-  final EventController controller = Get.find<EventController>();
+  final Function onDissmissFunction;
+  final EventController _eventController = Get.find<EventController>();
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
       key: Key(title),
-      onDismissed: (direction) => controller.deleteEvent(index),
+      onDismissed: (direction) => _eventController.deleteEvent(index),
       background: Center(
         child: Container(
           alignment: Alignment.centerRight,
@@ -62,7 +64,7 @@ class EventListTileWWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             InkWell(
-              onTap: () => controller.setEventDone(index),
+              onTap: () => _eventController.setEventDone(index),
               child: Container(
                 padding: const EdgeInsets.all(6),
                 decoration: isDone
