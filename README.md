@@ -89,10 +89,10 @@ Simple todo app by `GetX` and `Hive` and pushing notification with `flutter_loca
 - [x] save events on hive
 - [x] notification service
 - [x] event edit page
-- [ ] compatible version for ios
 - [x] add done button and share button in edit event
 - [x] implement motivation quote to drawer
-- [ ] add recycle bin page on drawer 
+- [x] add recycle bin page on drawer 
+- [ ] compatible version for ios
 - [ ] multie language 
 - [ ] implement tags and search on tags 
 - [ ] calendar show events on first load (tablecalendar bug)
