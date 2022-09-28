@@ -61,7 +61,7 @@ class CreateEventScreen extends StatelessWidget {
                   child: _eventController.remindMe.value
                       ? AlarmSectionColumnWidget(
                           initialDateTimeForSelector:
-                              _eventController.selectedDay.value,
+                              _eventController.focusedDay.value,
                           remindInFunction: (value) => remindIn = value,
                           cupertinoDatePickerFunction: (DateTime value) =>
                               pickedDateTime = value,

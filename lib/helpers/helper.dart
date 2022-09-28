@@ -39,12 +39,22 @@ made by Flutter, download from https://github.com/mohhamad-esmaili/Todo/releases
   bool checkTimes(
       DateTime pickedDateTime, DateTime calendarDate, bool remindMe) {
     calendarDate = getExactDateTime(calendarDate);
+    DateTime nowTime = DateTime.now();
+    print(calendarDate);
+    print(pickedDateTime);
     if (remindMe) {
-      if (pickedDateTime.hour >= calendarDate.hour &&
-          pickedDateTime.minute > calendarDate.minute) {
-        return true;
-      }
-      if (pickedDateTime.day > DateTime.now().day) {
+      if (pickedDateTime.year == calendarDate.year &&
+          pickedDateTime.day == calendarDate.day) {
+        if (pickedDateTime.hour >= calendarDate.hour) {
+          if (pickedDateTime.minute > calendarDate.minute) {
+            return true;
+          } else if (pickedDateTime.hour > calendarDate.hour) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+      } else if (pickedDateTime.hour > calendarDate.hour) {
         return true;
       }
     } else {

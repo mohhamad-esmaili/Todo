@@ -58,7 +58,7 @@ class EventListTileWWidget extends StatelessWidget {
             width: 1.5,
           ),
           borderRadius:
-              isDone ? BorderRadius.circular(80) : BorderRadius.circular(20),
+              isDone ? BorderRadius.circular(100) : BorderRadius.circular(10),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
